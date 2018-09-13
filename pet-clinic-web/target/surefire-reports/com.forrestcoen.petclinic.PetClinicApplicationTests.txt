@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.forrestcoen.petclinic.PetClinicApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.952 s - in com.forrestcoen.petclinic.PetClinicApplicationTests
