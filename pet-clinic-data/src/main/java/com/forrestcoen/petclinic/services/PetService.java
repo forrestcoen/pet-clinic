@@ -1,13 +1,7 @@
 package com.forrestcoen.petclinic.services;
 
-import java.util.Set;
-
 import com.forrestcoen.petclinic.model.Pet;
 
-public interface PetService {
-	Pet findById(Long id);
+public interface PetService extends CrudService<Pet, Long>{
 
-	Pet save(Pet pet);
-
-	Set<Pet> findAll();
 }
