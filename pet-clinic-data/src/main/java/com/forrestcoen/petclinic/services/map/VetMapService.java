@@ -2,6 +2,7 @@ package com.forrestcoen.petclinic.services.map;
 
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.forrestcoen.petclinic.model.Specialty;
@@ -10,10 +11,11 @@ import com.forrestcoen.petclinic.services.SpecialtyService;
 import com.forrestcoen.petclinic.services.VetService;
 
 @Service
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
+@Profile({ "default", "map" })
+public class VetMapService extends AbstractMapService<Vet, Long> implements VetService {
 	private final SpecialtyService specialtyService;
 
-	public VetServiceMap(SpecialtyService specialtyService) {
+	public VetMapService(SpecialtyService specialtyService) {
 		this.specialtyService = specialtyService;
 	}
 
@@ -42,12 +44,12 @@ public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetS
 		if (vet.getSpecialties().size() > 0) {
 			vet.getSpecialties().forEach(specialty -> {
 				if (specialty.getId() == null) {
-					Specialty savedSpecialty = specialtyService.save(specialty); 
+					Specialty savedSpecialty = specialtyService.save(specialty);
 					specialty.setId(savedSpecialty.getId());
 				}
 			});
 		}
-		
+
 		return super.save(vet);
 	}
 }

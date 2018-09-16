@@ -2,6 +2,7 @@ package com.forrestcoen.petclinic.services.map;
 
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.forrestcoen.petclinic.model.Owner;
@@ -11,10 +12,11 @@ import com.forrestcoen.petclinic.services.PetService;
 import com.forrestcoen.petclinic.services.PetTypeService;
 
 @Service
+@Profile({ "default", "map" })
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 	private final PetTypeService petTypeService;
 	private final PetService petService;
-	
+
 	public OwnerServiceMap(PetTypeService petTypeService, PetService petService) {
 		this.petTypeService = petTypeService;
 		this.petService = petService;
@@ -52,14 +54,14 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 					} else {
 						throw new RuntimeException("Pet type is required");
 					}
-					
+
 					if (pet.getId() == null) {
 						Pet savedPet = petService.save(pet);
 						pet.setId(savedPet.getId());
 					}
 				});
 			}
-			
+
 			return super.save(owner);
 		} else {
 			return null;
